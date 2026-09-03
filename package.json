@@ -1,0 +1,17 @@
+{
+  "name": "comic-term",
+  "version": "1.0.0",
+  "description": "A Konsole-like terminal emulator with tabs. Comic Sans by default.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  },
+  "dependencies": {
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/xterm": "^5.5.0",
+    "node-pty": "^1.0.0"
+  }
+}
