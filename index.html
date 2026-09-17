@@ -1,28 +1,33 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Terminal output is attacker-controlled in the general case (ssh into
+     anything, `cat` any file). Deny everything by default and allow only the
+     local bundle: no network, no remote scripts, no inline <script>.
+     xterm.js injects its own <style> element, hence style 'unsafe-inline'. -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none';
+               script-src 'self' file:;
+               style-src 'self' file: 'unsafe-inline';
+               img-src 'self' file: data:;
+               font-src 'self' file:;
+               connect-src 'none';
+               object-src 'none';
+               base-uri 'none';
+               form-action 'none'">
 <title>ComicTerm</title>
 <link rel="stylesheet" href="node_modules/@xterm/xterm/css/xterm.css">
-<style>
-  html, body { margin: 0; height: 100%; background: #1e1e1e; overflow: hidden; }
-  #tabbar { display: flex; align-items: center; background: #2d2d2d; height: 34px; -webkit-app-region: drag; }
-  .tab { -webkit-app-region: no-drag; display: flex; align-items: center; gap: 8px; padding: 6px 10px 6px 14px; color: #ccc; font: 13px sans-serif; cursor: pointer; border-right: 1px solid #1e1e1e; }
-  .tab.active { background: #1e1e1e; color: #fff; }
-  .tab-close { opacity: 0.6; padding: 0 3px; border-radius: 3px; }
-  .tab-close:hover { opacity: 1; background: #c0392b; }
-  #newtab { -webkit-app-region: no-drag; padding: 6px 12px; color: #ccc; cursor: pointer; font: 16px sans-serif; }
-  #fontbox { -webkit-app-region: no-drag; margin-left: auto; margin-right: 8px; }
-  #fontbox input { width: 130px; background: #1e1e1e; color: #ccc; border: 1px solid #444; font-size: 12px; padding: 3px; }
-  #panes { position: absolute; top: 34px; left: 0; right: 0; bottom: 0; }
-  .pane { position: absolute; top: 0; left: 0; right: 0; bottom: 0; padding: 6px; box-sizing: border-box; display: none; }
-  .pane.active { display: block; }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="tabbar">
-    <div id="newtab" title="New tab">+</div>
-    <div id="fontbox"><input id="fontinput" value="Cascadia Mono" title="Terminal font"></div>
+    <div id="tabstrip" role="tablist" aria-label="Terminal tabs"></div>
+    <button id="newtab" type="button" title="New tab (Ctrl+Shift+T)" aria-label="New tab">+</button>
+    <div id="fontbox">
+      <label class="visually-hidden" for="fontinput">Terminal font</label>
+      <input id="fontinput" title="Terminal font — Ctrl +/- to resize" spellcheck="false" autocomplete="off">
+    </div>
   </div>
   <div id="panes"></div>
   <script src="node_modules/@xterm/xterm/lib/xterm.js"></script>

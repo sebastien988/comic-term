@@ -1,1 +1,17 @@
 node_modules/
+
+# Build output
+dist/
+out/
+build/
+*.asar
+
+# Logs and local scratch
+*.log
+npm-debug.log*
+.env
+.env.local
+
+# OS cruft
+.DS_Store
+Thumbs.db

@@ -1,0 +1,163 @@
+:root {
+  --bg: #1e1e1e;
+  --chrome: #2d2d2d;
+  --fg: #ccc;
+  --fg-strong: #fff;
+  --border: #444;
+  --danger: #c0392b;
+  --tabbar-height: 34px;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+#tabbar {
+  display: flex;
+  align-items: stretch;
+  background: var(--chrome);
+  height: var(--tabbar-height);
+  -webkit-app-region: drag;
+}
+
+#tabstrip {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+#tabstrip::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  -webkit-app-region: no-drag;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px 0 14px;
+  color: var(--fg);
+  font: 13px sans-serif;
+  cursor: pointer;
+  border-right: 1px solid var(--bg);
+  max-width: 220px;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.tab:focus-visible {
+  outline: 2px solid #5a9fd4;
+  outline-offset: -2px;
+}
+
+.tab.active {
+  background: var(--bg);
+  color: var(--fg-strong);
+}
+
+.tab-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tab-close {
+  flex: none;
+  appearance: none;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  opacity: 0.6;
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.tab-close:hover,
+.tab-close:focus-visible {
+  opacity: 1;
+  background: var(--danger);
+  color: var(--fg-strong);
+}
+
+#newtab {
+  -webkit-app-region: no-drag;
+  flex: none;
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0 12px;
+  color: var(--fg);
+  cursor: pointer;
+  font: 16px sans-serif;
+}
+
+#newtab:hover,
+#newtab:focus-visible {
+  color: var(--fg-strong);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#fontbox {
+  -webkit-app-region: no-drag;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-right: 8px;
+  flex: none;
+}
+
+#fontbox input {
+  width: 130px;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 3px 5px;
+}
+
+#fontbox input:focus {
+  outline: none;
+  border-color: #5a9fd4;
+}
+
+#panes {
+  position: absolute;
+  top: var(--tabbar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.pane {
+  position: absolute;
+  inset: 0;
+  padding: 6px;
+  box-sizing: border-box;
+  display: none;
+}
+
+.pane.active {
+  display: block;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

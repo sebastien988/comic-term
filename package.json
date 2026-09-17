@@ -1,17 +1,48 @@
 {
   "name": "comic-term",
   "version": "1.0.0",
-  "description": "A Konsole-like terminal emulator with tabs. Comic Sans by default.",
+  "private": true,
+  "description": "A tabbed terminal emulator built on Electron, xterm.js and node-pty.",
+  "keywords": [
+    "terminal",
+    "terminal-emulator",
+    "electron",
+    "xterm",
+    "node-pty",
+    "tabs"
+  ],
+  "homepage": "https://github.com/sebastien988/comic-term#readme",
+  "bugs": {
+    "url": "https://github.com/sebastien988/comic-term/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastien988/comic-term.git"
+  },
   "main": "main.js",
+  "files": [
+    "main.js",
+    "preload.js",
+    "renderer.js",
+    "index.html",
+    "style.css",
+    "src"
+  ],
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "node --test \"test/*.test.js\"",
+    "smoke": "electron test/smoke.js",
+    "check": "node --check main.js && node --check preload.js && node --check renderer.js && node --check src/shell.js && node --check src/validate.js && node --check test/smoke.js"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "devDependencies": {
-    "electron": "^31.0.0"
+    "electron": "^44.4.1"
   },
   "dependencies": {
     "@xterm/addon-fit": "^0.10.0",
     "@xterm/xterm": "^5.5.0",
-    "node-pty": "^1.0.0"
+    "node-pty": "^1.1.0"
   }
 }
