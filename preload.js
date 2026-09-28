@@ -8,3 +8,9 @@ contextBridge.exposeInMainWorld('ptyAPI', {
   onData: (cb) => ipcRenderer.on('pty:data', (e, payload) => cb(payload)),
   onExit: (cb) => ipcRenderer.on('pty:exit', (e, payload) => cb(payload)),
 });
+
+contextBridge.exposeInMainWorld('hostAPI', {
+  readClipboard: () => ipcRenderer.invoke('clipboard:read'),
+  writeClipboard: (text) => ipcRenderer.send('clipboard:write', text),
+  openExternal: (url) => ipcRenderer.send('open-external', url),
+});
